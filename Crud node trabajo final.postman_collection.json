@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "5e10c471-947c-4f2d-9d30-c5e80f014608",
+		"name": "Crud node trabajo final",
+		"description": "# Descripción\n\nEsta API permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre productos en una base de datos MongoDB. Los usuarios pueden listar todos los productos sin autenticación, mientras que las operaciones de creación, actualización y eliminación requieren un token JWT.\n\n# Requisitos\n\n- **Node.js** (v20.18.0 o superior)\n    \n- **npm** (Node Package Manager)\n    \n- **MongoDB** (MongoDB Atlas)\n    \n- **Postman** (para probar la API)\n    \n\n# Instalación y Configuración\n\n## 1\\. Clonar el repositorio\n\n``` git\ngit clone https://github.com/Fabianvcp/API_CRUD.git\ncd crud_api\n\n ```\n\n## 2\\. Instalar dependencias\n\nEjecuta el siguiente comando para instalar las dependencias necesarias:\n\n``` Bash\nnpm install\n\n ```\n\n## 3\\. Configurar variables de entorno\n\nCrea un archivo `.env` en la raíz del proyecto y añade lo siguiente:\n\n``` JavaScript\nPORT=5000\nMONGO_URI=mongodb+srv://<USUARIO>:CONTRASEÑA>@<CLUSTER_URL>/<NOMBRE_BASE_DATOS>?retryWrites=true&w=majority\nJWT_SECRET=tu_clave_secreta_jwt\n\n ```\n\nReemplaza , , , y con tus credenciales de MongoDB.\n\n## 4\\. Iniciar la aplicación\n\nEjecuta el siguiente comando para iniciar la aplicación:\n\n``` bash\nnpm start\n\n ```\n\nLa API estará disponible en [http://localhost:5000](http://localhost:5000).\n\n# Rutas Disponibles\n\n### 1\\. **Autenticación**\n\n#### **Login**\n\n- **Método:** `POST`\n    \n- **Ruta:** `/api/users/login`\n    \n- **Cuerpo de la solicitud:**\n    \n    ``` json\n      {\n      \"email\": \"test@gmail.com\",\n      \"password\": \"root\"\n      }\n    \n     ```\n    \n- **Respuesta exitosa:**\n    \n    ``` json\n      {\n      \"token\": \"tu_token_jwt_aquí\"\n      }\n    \n     ```\n    \n    ## 2\\. **Productos**\n    \n\n#### **Listar todos los productos**\n\n- **Método:** `GET`\n    \n- **Ruta:** `/api/products`\n    \n- **Descripción:** No requiere autenticación.\n    \n- **Respuesta exitosa:**\n    \n    ``` json\n      [\n      {\n          \"_id\": \"6706951a272dcf0115261010\",\n          \"name\": \"Gaseosa Coca Cola\",\n          \"price\": 100,\n          \"description\": \"Este es un producto de ejemplo\",\n          \"createdAt\": \"2024-10-09T14:37:14.126Z\",\n          \"__v\": 0\n      },\n      ...\n      ]\n    \n     ```\n    \n    ### **Crear un nuevo producto**\n    \n- **Método:** `POST`\n    \n- **Ruta:** `/api/products`\n    \n- **Descripción:** Requiere autenticación.\n    \n- **Cuerpo de la solicitud:**\n    \n    ``` json\n      {\n      \"name\": \"Gaseosa Coca Cola\",\n      \"price\": 100,\n      \"description\": \"Este es un producto de ejemplo\"\n      }\n    \n     ```\n    \n- **Respuesta exitosa:**\n    \n    ``` json\n      {\n      \"_id\": \"6706951a272dcf0115261011\",\n      \"name\": \"Gaseosa Coca Cola\",\n      \"price\": 100,\n      \"description\": \"Este es un producto de ejemplo\",\n      \"createdAt\": \"2024-10-09T14:37:14.126Z\",\n      \"__v\": 0\n      }\n    \n     ```\n    \n    ### **Crear varios nuevos productos**\n    \n- **Método:** `POST`\n    \n- **Ruta:** `/api/products/several`\n    \n- **Descripción:** Requiere autenticación.\n    \n- **Cuerpo de la solicitud:**\n    \n    ``` json\n      [\n      {\n          \"_id\": \"6706951a272dcf0115261010\",\n          \"name\": \"Gaseosa Coca Cola\",\n          \"price\": 100,\n          \"description\": \"Este es un producto de ejemplo\"\n          \"__v\": 0\n      },\n      ...\n      ]\n    \n     ```\n    \n- **Respuesta exitosa:**\n    \n    ``` json\n      [\n      {\n          \"_id\": \"6706951a272dcf0115261010\",\n          \"name\": \"Gaseosa Coca Cola\",\n          \"price\": 100,\n          \"description\": \"Este es un producto de ejemplo\",\n          \"createdAt\": \"2024-10-09T14:37:14.126Z\",\n          \"__v\": 0\n      },\n      ...\n      ]\n    \n     ```\n    \n    ### **Actualizar un producto existente**\n    \n- **Método:** `PUT`\n    \n- **Ruta:** `/api/products/:id`\n    \n- **Descripción:** Requiere autenticación.\n    \n- **Cuerpo de la solicitud:**\n    \n    ``` json\n      {\n      \"name\": \"Gaseosa Coca Cola\",\n      \"price\": 120,\n      \"description\": \"Producto actualizado\"\n      }\n    \n     ```\n    \n\n```\n-   **Respuesta exitosa:**\n```json\n{\n    \"_id\": \"6706951a272dcf0115261010\",\n    \"name\": \"Gaseosa Coca Cola\",\n    \"price\": 120,\n    \"description\": \"Producto actualizado\",\n    \"createdAt\": \"2024-10-09T14:37:14.126Z\",\n    \"__v\": 0\n}\n\n ```\n\n### **Eliminar un producto**\n\n- **Método:** `DELETE`\n    \n- **Ruta:** `/api/products/:id`\n    \n- **Descripción:** Requiere autenticación.\n    \n- **Respuesta exitosa:**\n    \n    ``` json\n      { \n          \"message\": \"Producto eliminado\" \n      }\n    \n     ```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "3784344"
+	},
+	"item": [
+		{
+			"name": "3. Get datos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/info?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"info"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "1. Login y token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/info",
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "2. enviar datos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/info",
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "2.5 Enviar vario registros a la vez",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/info",
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "4. Actualizar datos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "id",
+						"value": "6706951a272dcf0115261010",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImlhdCI6MTcyODQ4NDQwNywiZXhwIjoxNzI4NDg4MDA3fQ.G_ZKUKvJmN_CYgcg349_Cd2h7pxJUz7F3OE8DfmiBTA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"Gaseosa Coca cola\",\n        \"price\": 100,\n        \"description\": \"Este es un producto de ejemplo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5000/api/products",
+				"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "5. Eliminar datos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/info?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"info"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
