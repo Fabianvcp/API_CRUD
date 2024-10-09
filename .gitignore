@@ -1,0 +1,15 @@
+# .gitignore
+
+# Node modules
+node_modules/
+
+# Archivos de log
+npm-debug.log
+yarn-error.log
+
+# Archivos de entorno
+.env
+
+# Otras configuraciones de sistema
+.DS_Store
+Thumbs.db
